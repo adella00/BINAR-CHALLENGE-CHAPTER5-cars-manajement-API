@@ -9,6 +9,27 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Car.belongsTo(models.User, {
+        as: "CreatedBy",
+        foreignKey: {
+          name: "createdBy",
+          allowNull: true,
+        },
+      });
+      Car.belongsTo(models.User, {
+        as: "UpdatedBy",
+        foreignKey: {
+          name: "updatedBy",
+          allowNull: true,
+        },
+      });
+      Car.belongsTo(models.User, {
+        as: "DeletedBy",
+        foreignKey: {
+          name: "deletedBy",
+          allowNull: true,
+        },
+      });
     }
   }
   Car.init(
@@ -17,7 +38,13 @@ module.exports = (sequelize, DataTypes) => {
       price: DataTypes.INTEGER,
       type: DataTypes.STRING,
       category: DataTypes.ENUM(["small", "medium", "large"]),
-      imageUrl: DataTypes.TEXT,
+      imageUrl: {
+        type: DataTypes.TEXT,
+        defaultValue: "https://tse2.mm.bing.net/th?id=OIP.U2iQ7wNK6ZzTW_traW_-PQHaHa&pid=Api&P=0&h=180",
+      },
+      createdBy: DataTypes.INTEGER,
+      updatedBy: DataTypes.INTEGER,
+      deletedBy: DataTypes.INTEGER,
     },
     {
       sequelize,

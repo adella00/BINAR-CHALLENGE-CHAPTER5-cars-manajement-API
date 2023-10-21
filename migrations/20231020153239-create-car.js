@@ -24,6 +24,16 @@ module.exports = {
       },
       imageUrl: {
         type: Sequelize.TEXT,
+        defaultValue: "https://tse2.mm.bing.net/th?id=OIP.U2iQ7wNK6ZzTW_traW_-PQHaHa&pid=Api&P=0&h=180",
+      },
+      createdBy: {
+        type: Sequelize.INTEGER,
+      },
+      updatedBy: {
+        type: Sequelize.INTEGER,
+      },
+      deletedBy: {
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
