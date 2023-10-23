@@ -4,7 +4,7 @@ const ApiError = require("../utils/apiError");
 
 const findUsers = async (req, res, next) => {
   try {
-    const users = await User.findAll();
+    const users = await User.findAll({ include: ["createdCars", "updatedCars", "deletedCars"] });
 
     res.status(200).json({
       status: "Success",
@@ -37,7 +37,7 @@ const findUserById = async (req, res, next) => {
 };
 
 const updateUser = async (req, res, next) => {
-  const { name, age, role, address, shopId } = req.body;
+  const { name, age, role, address } = req.body;
   try {
     await User.update(
       {
@@ -45,7 +45,6 @@ const updateUser = async (req, res, next) => {
         age,
         role,
         address,
-        shopId,
       },
       {
         where: {
